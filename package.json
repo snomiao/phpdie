@@ -1,6 +1,6 @@
 {
   "name": "@snomiao/die",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Just like PHP's `DIE('REASON')`, Simple function while doing functional dev",
   "keywords": [
     "throw",
@@ -9,7 +9,7 @@
     "functional programming"
   ],
   "license": "ISC",
-  "author": "",
+  "author": "snomiao <snomiao@gmail.com>",
   "type": "module",
   "exports": {
     "import": "./dist/index.js",
@@ -25,7 +25,6 @@
     "release": "bunx standard-version && git push --follow-tags && npm publish",
     "test": "bun test"
   },
-  "dependencies": {},
   "devDependencies": {
     "@types/bun": "^1.1.4",
     "@types/jest": "^29.5.12",
