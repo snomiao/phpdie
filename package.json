@@ -1,31 +1,38 @@
 {
   "name": "@snomiao/die",
   "version": "1.0.6",
-  "description": "",
-  "keywords": [],
+  "description": "Just like PHP's `DIE('REASON')`, Simple function while doing functional dev",
+  "keywords": [
+    "throw",
+    "error",
+    "die",
+    "functional programming"
+  ],
   "license": "ISC",
   "author": "",
   "type": "module",
   "exports": {
-    "import": "./dist/index.mjs",
+    "import": "./dist/index.js",
     "types": "./dist/index.d.ts"
   },
-  "main": "index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "module": "index.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "snobuild",
-    "prepack": "npm run build",
-    "test": "vitest --run"
+    "build": "bun build index.ts --outdir=dist",
+    "prerelease": "bun run build && bun run test",
+    "release": "bunx standard-version && git push --follow-tags && npm publish",
+    "test": "bun test"
   },
-  "dependencies": {
-    "@types/bun": "^1.1.2"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "vitest": "^1.6.0"
+    "@types/bun": "^1.1.4",
+    "@types/jest": "^29.5.12",
+    "typescript": "^5.4.5"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
   },
   "publishConfig": {
     "access": "public"
