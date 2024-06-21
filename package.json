@@ -1,6 +1,6 @@
 {
   "name": "@snomiao/die",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Just like PHP's `DIE('REASON')`, Simple function while doing functional dev",
   "keywords": [
     "throw",
@@ -16,6 +16,7 @@
     "types": "./dist/index.d.ts"
   },
   "module": "index.ts",
+  "types": "./index.ts",
   "files": [
     "dist"
   ],
