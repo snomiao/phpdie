@@ -1,6 +1,6 @@
 {
   "name": "@snomiao/die",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Just like PHP's `DIE('REASON')`, Simple function while doing functional dev",
   "keywords": [
     "throw",
