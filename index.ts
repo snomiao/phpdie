@@ -5,6 +5,6 @@ export default function DIE(reason?: string | Error): never {
   throw reason;
 }
 export function DIEAlert(reason?: string | Error): never {
-  alert(String(reason?.message ?? reason))
+  alert(String(reason instanceof Error && reason.message || reason))
   DIE(reason)
 }
