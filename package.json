@@ -1,7 +1,7 @@
 {
   "name": "@snomiao/die",
   "version": "1.0.10",
-  "description": "|| DIE('reason') Throws an error like PHP's `or DIE('REASON')`, Simple error throwing in a functional dev.",
+  "description": "|| DIE('reason') Throws an error like PHP 's `or DIE('REASON')`, Simple error throwing in a functional dev.",
   "keywords": [
     "throw",
     "error",
