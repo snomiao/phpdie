@@ -1,12 +1,12 @@
 {
   "name": "@snomiao/die",
   "version": "1.0.9",
-  "description": "Just like PHP's `DIE('REASON')`, Simple function while doing functional dev",
+  "description": "|| DIE('reason') Throws an error like PHP's `or DIE('REASON')`, Simple error throwing in a functional dev.",
   "keywords": [
     "throw",
     "error",
     "die",
-    "functional programming"
+    "functional programming", "php", "pipe", "or die"
   ],
   "license": "ISC",
   "author": "snomiao <snomiao@gmail.com>",

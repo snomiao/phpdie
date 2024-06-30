@@ -1,6 +1,6 @@
 # Die
 
-Just like PHP's `DIE('REASON')`, Simple function while doing functional dev
+`|| DIE('reason')` Throws an error like PHP's `or DIE('REASON')`, Simple error throwing in a functional dev.
 
 ## Usage
 
