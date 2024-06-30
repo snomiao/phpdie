@@ -8,7 +8,7 @@
 import DIE from '@snomiao/die'
 const token = process.env.TOKEN ?? DIE("Missing Token")
 
-console.log(token)
+console.log(token) // typeof token === "string"
 
 
 ```
