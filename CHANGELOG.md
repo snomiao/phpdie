@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/snomiao/die/compare/v1.0.11...v1.1.0) (2024-07-02)
+
+
+### Features
+
+* **die:** template ([52c0799](https://github.com/snomiao/die/commit/52c0799995bb044386924a8c57817900a4236cc4))
+
+
+### Bug Fixes
+
+* **die:** support array ([6184043](https://github.com/snomiao/die/commit/6184043fee91fa228cebcaa690642cfaa4be86e2))
+* **main:** roa ([9953a08](https://github.com/snomiao/die/commit/9953a0812a2b99b7bf11f58950ea8faccb90db08))
+
 ### [1.0.11](https://github.com/snomiao/die/compare/v1.0.10...v1.0.11) (2024-07-01)
 
 ### [1.0.10](https://github.com/snomiao/die/compare/v1.0.9...v1.0.10) (2024-06-30)
