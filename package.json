@@ -1,12 +1,15 @@
 {
   "name": "@snomiao/die",
-  "version": "1.0.9",
-  "description": "Just like PHP's `DIE('REASON')`, Simple function while doing functional dev",
+  "version": "1.0.11",
+  "description": "|| DIE('reason') Throws an error like PHP 's `or DIE('REASON')`, Simple error throwing in a functional dev.",
   "keywords": [
     "throw",
     "error",
     "die",
-    "functional programming"
+    "functional",
+    "php",
+    "pipe",
+    "or die"
   ],
   "license": "ISC",
   "author": "snomiao <snomiao@gmail.com>",
@@ -30,7 +33,7 @@
   "devDependencies": {
     "@types/bun": "^1.1.4",
     "@types/jest": "^29.5.12",
-    "typescript": "^5.4.5"
+    "typescript": "^5.0.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
