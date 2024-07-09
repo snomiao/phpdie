@@ -1,12 +1,12 @@
 import yaml from "yaml";
 import { DIE } from ".";
-import { isPromise } from "util/types";
 /** Attach args into cause info when fn dies */
 export function catchArgs<F extends (...args: any[]) => any>(fn: F): F {
   return ((...args) => {
     try {
       const r = fn(...args);
-      return !isPromise(r)
+      const isPromise = typeof r.then === "function";
+      return !isPromise
         ? r
         : (async function () {
             return await r;
