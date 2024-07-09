@@ -1,4 +1,4 @@
-import DIE from ".";
+import { DIE } from ".";
 
 it("lives", () => {
   const token = "123" ?? DIE("Missing Token");

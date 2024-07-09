@@ -1,6 +1,10 @@
-type Reason = string | ReadonlyArray<string> | Error;
+import { catchArgs } from "./catchArgs";
 
-export default function DIE(reason?: Reason, ...slots: string[]) {
+type Reason = string | ReadonlyArray<string> | Error;
+/** Die with string */
+export default DIE;
+
+export function DIE(reason?: Reason, ...slots: string[]): never {
   throw throwsError(reason, ...slots);
 }
 export const DIEAlert: typeof DIE = (...args) => {
@@ -11,6 +15,7 @@ export const DIEProcess: typeof DIE = (...args) => {
   console.error(stringifyError(...args));
   process.exit(1);
 };
+
 function throwsError(reason?: Reason, ...slots: string[]) {
   if (typeof reason === "string") {
     return reason.trim();
@@ -29,3 +34,5 @@ function stringifyError(reason?: Reason, ...slots: string[]) {
   }
   return String((reason instanceof Error && reason.message) || reason);
 }
+
+export { catchArgs };
