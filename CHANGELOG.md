@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/snomiao/die/compare/v1.1.0...v1.2.0) (2024-07-09)
+
+
+### Features
+
+* **catchargs:** init ([1bd6001](https://github.com/snomiao/die/commit/1bd6001f4f55af018ef2bce82c79bb6493f9f29c))
+
+
+### Bug Fixes
+
+* **catchArgs:** use ispromise with browser ([fda6dd4](https://github.com/snomiao/die/commit/fda6dd4f5d935dc55d5c6f1d14651a1e23cba78e))
+* **main:** add test ([6f959e6](https://github.com/snomiao/die/commit/6f959e64363bdfbfb893eef50ba866906e97ce1e))
+
 ## [1.1.0](https://github.com/snomiao/die/compare/v1.0.11...v1.1.0) (2024-07-02)
 
 
