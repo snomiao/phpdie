@@ -1,6 +1,6 @@
 {
-  "name": "@snomiao/die",
-  "version": "1.2.0",
+  "name": "phpdie",
+  "version": "1.2.1",
   "description": "|| DIE('reason') Throws an error like PHP 's `or DIE('REASON')`, Simple error throwing in a functional dev.",
   "keywords": [
     "throw",
@@ -29,9 +29,6 @@
     "prerelease": "bun run build && bun run test",
     "release": "bunx standard-version && git push --follow-tags && npm publish",
     "test": "bun test"
-  },
-  "dependencies": {
-    "@types/node": "^20.14.8"
   },
   "devDependencies": {
     "@types/bun": "^1.1.6",
