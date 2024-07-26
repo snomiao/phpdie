@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.5](https://github.com/snomiao/die/compare/v1.2.4...v1.2.5) (2024-07-26)
+
+
+### Bug Fixes
+
+* **DIEError:** fn added ([300aa72](https://github.com/snomiao/die/commit/300aa72c166ccb36c7f6b0d8e14f53e65d02ea0e))
+* **die:** support stringlike ([a6f6828](https://github.com/snomiao/die/commit/a6f68287f13142593cd8068d1fbb4915f438167a))
+
 ### [1.2.4](https://github.com/snomiao/die/compare/v1.2.3...v1.2.4) (2024-07-26)
 
 ### [1.2.3](https://github.com/snomiao/die/compare/v1.2.2...v1.2.3) (2024-07-14)
