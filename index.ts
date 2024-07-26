@@ -4,6 +4,9 @@ type Reason = string | ReadonlyArray<string> | Error;
 /** Die with string */
 export default DIE;
 
+export function DIEError(reason?: Reason, ...slots: string[]): never {
+  throw new Error(stringifyError(reason, ...slots));
+}
 export function DIE(reason?: Reason, ...slots: string[]): never {
   throw throwsError(reason, ...slots);
 }
