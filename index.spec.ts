@@ -1,7 +1,7 @@
 import { DIE } from ".";
 
 it("lives", () => {
-  const token = "123" ?? DIE("Missing Token");
+  const token = "123";
   console.log(token);
   expect(token).toEqual("123");
 });

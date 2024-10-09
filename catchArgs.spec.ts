@@ -1,4 +1,3 @@
-import { DIE } from ".";
 import { catchArgs } from "./catchArgs";
 
 const parse = (args: string) => JSON.parse(args);

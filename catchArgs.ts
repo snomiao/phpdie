@@ -1,5 +1,3 @@
-import yaml from "yaml";
-import { DIE } from ".";
 /** Attach args into cause info when fn dies */
 export function catchArgs<F extends (...args: any[]) => any>(fn: F): F {
   return ((...args) => {
