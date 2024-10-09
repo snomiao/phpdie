@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.13](https://github.com/snomiao/phpdie/compare/v1.2.12...v1.2.13) (2024-10-09)
+
+
+### Bug Fixes
+
+* **main:** remove yaml dep ([9b564f2](https://github.com/snomiao/phpdie/commit/9b564f2735979c100d0980d45c3224027f61195f))
+
 ### [1.2.12](https://github.com/snomiao/die/compare/v1.2.11...v1.2.12) (2024-08-03)
 
 ### [1.2.11](https://github.com/snomiao/die/compare/v1.2.10...v1.2.11) (2024-08-03)
