@@ -1,5 +1,5 @@
-import type { StringLike } from "bun";
 import { catchArgs } from "./catchArgs";
+type StringLike = string | { toString(): string };
 
 type Reason = string | ReadonlyArray<string> | Error;
 /** Die with string */
