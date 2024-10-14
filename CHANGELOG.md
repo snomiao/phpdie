@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.14](https://github.com/snomiao/phpdie/compare/v1.2.13...v1.2.14) (2024-10-14)
+
+
+### Bug Fixes
+
+* **main:** remove bun dep ([494f990](https://github.com/snomiao/phpdie/commit/494f99003dd093ce5a96f0cccaa58a61844e4eb4))
+
 ### [1.2.13](https://github.com/snomiao/phpdie/compare/v1.2.12...v1.2.13) (2024-10-09)
 
 
