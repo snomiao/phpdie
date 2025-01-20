@@ -29,11 +29,14 @@
     "build": "bun build index.ts --outdir=dist",
     "prerelease": "bun run build && bun run test",
     "release": "bunx standard-version && git push --follow-tags && npm publish",
-    "test": "bun test"
+    "test": "bun test",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@types/bun": "^1.1.6",
     "@types/jest": "^29.5.12",
+    "husky": "^9.1.7",
+    "semantic-release": "^24.2.1",
     "typescript": "^5.0.0"
   },
   "peerDependencies": {
