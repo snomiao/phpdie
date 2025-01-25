@@ -1,4 +1,15 @@
-/** Attach args into cause info when fn dies */
+/**
+ * Attach args into error's {cause} when fn dies
+ * 
+ * Usage:
+ * 
+ * fn2 = catchArgs(fn1)
+ * 
+ * when fn1(1,2,3) dies => print Error: XXX
+ * 
+ * when fn2(1,2,3) dies => print Error: XXX, cause: { args: [1,2,3]}
+ * 
+ */
 export function catchArgs<F extends (...args: any[]) => any>(fn: F): F {
   return ((...args) => {
     try {
