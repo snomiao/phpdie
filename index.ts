@@ -9,7 +9,7 @@ export function DIEError(reason?: Reason, ...slots: StringLike[]): never {
   throw new Error(stringifyError(reason, ...slots));
 }
 export function DIE(reason?: Reason, ...slots: StringLike[]): never {
-  throw throwsError(reason, ...slots);
+  throw errorFormat(reason, ...slots);
 }
 export const DIEAlert: typeof DIE = (...args) => {
   alert(stringifyError(...args));
@@ -20,7 +20,7 @@ export const DIEProcess: typeof DIE = (...args) => {
   process.exit(1);
 };
 
-function throwsError(reason?: Reason, ...slots: StringLike[]) {
+function errorFormat(reason?: Reason, ...slots: StringLike[]) {
   if (typeof reason === "string") {
     return reason.trim();
   }
