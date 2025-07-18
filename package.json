@@ -9,7 +9,8 @@
     "functional",
     "php",
     "pipe",
-    "or die"
+    "or die",
+    "@snomiao/die"
   ],
   "license": "MIT",
   "author": "snomiao <snomiao@gmail.com>",
