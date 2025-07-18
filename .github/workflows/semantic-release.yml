@@ -21,9 +21,7 @@ jobs:
           # reminder to setup read/write permission for this token
           # here: REPO_URL/settings/actions
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      # also publish as @snomiao/die
-      - run: npm pkg set name=@snomiao/die
-      - run: npm publish || echo "Maybe package already published"
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          PHPDIE_NPM_CONFIG_REGISTRY: https://registry.npmjs.org
+          PHPDIE_NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          SNODIE_NPM_CONFIG_REGISTRY: https://registry.npmjs.org
+          SNODIE_NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
