@@ -2,12 +2,14 @@ import { catchArgs } from "./catchArgs";
 type StringLike = string | { toString(): string };
 
 type Reason = string | ReadonlyArray<string> | Error;
-/** Die with string */
+
+/** DIE with template string or error or normal string */
 export default DIE;
 
 export function DIEError(reason?: Reason, ...slots: StringLike[]): never {
   throw new Error(stringifyError(reason, ...slots));
 }
+
 export function DIE(reason?: Reason, ...slots: StringLike[]): never {
   throw errorFormat(reason, ...slots);
 }
