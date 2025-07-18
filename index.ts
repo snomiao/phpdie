@@ -25,7 +25,7 @@ export function DIES<Args extends unknown[]>(alert: (...args: readonly [...Args]
 /**
  * show an alert with the error message and stop current function.
  *
- * @deprecated Use DIES(alert, ...) instead
+ * @deprecated Use || DIES(alert, 'YOUR ERROR MESSAGE') instead
  */
 export const DIEAlert: typeof DIE = (...args) => {
   alert(stringifyError(...args));
@@ -33,7 +33,9 @@ export const DIEAlert: typeof DIE = (...args) => {
 };
 
 /**
- * Node.js process only, print error and exit with code 1.
+ * print error and exit with code 1.
+ * 
+ * @deprecated Use || DIES(()=> process.exit(1), console.error('ERROR')) instead
  */
 export const DIEProcess: typeof DIE = (...args) => {
   console.error(stringifyError(...args));
