@@ -33,7 +33,7 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@types/bun": "^1.1.6",
+    "@types/bun": "^1.2.18",
     "@types/jest": "^29.5.12",
     "husky": "^9.1.7",
     "semantic-release": "^24.2.1",
