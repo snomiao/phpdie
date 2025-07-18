@@ -1,7 +1,8 @@
 import { catchArgs } from "./catchArgs";
-type StringLike = string | { toString(): string };
+import { stringifyError } from "./stringifyError";
+export type StringLike = string | { toString(): string };
 
-type Reason = string | ReadonlyArray<string> | Error;
+export type Reason = string | ReadonlyArray<string> | Error;
 
 /** DIE with template string or error or normal string */
 export default DIE;
@@ -52,16 +53,6 @@ function errorFormat(reason?: Reason, ...slots: StringLike[]) {
     return reason.map((e, i) => e + (slots[i] ?? "")).join("");
   }
   return reason;
-}
-
-function stringifyError(reason?: Reason, ...slots: StringLike[]) {
-  if (typeof reason === "string") {
-    return reason.trim();
-  }
-  if (Array.isArray(reason)) {
-    return reason.map((e, i) => e + (slots[i]?.toString() ?? "")).join("");
-  }
-  return String((reason instanceof Error && reason.message) || reason);
 }
 
 export { catchArgs };

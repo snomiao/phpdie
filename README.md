@@ -20,7 +20,7 @@ The `DIES` function allows you to call an alert function (like `alert`, `console
 ```js
 import { DIES } from '@snomiao/die'
 
-const ooops = false!
+const ooops = false
 
 // With alert
 ooops || DIES(alert, "Something went wrong!");
