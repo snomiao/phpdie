@@ -17,7 +17,6 @@
   "type": "module",
   "exports": {
     "import": "./dist/index.js",
-    "require": "./dist/index.js",
     "types": "./index.ts"
   },
   "main": "dist/index.js",
