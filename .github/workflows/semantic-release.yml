@@ -23,7 +23,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       # also publish as @snomiao/die
-      - run: npm pkg set name @snomiao/die
-      - run: npm publish
+      - run: npm pkg set name=@snomiao/die
+      - run: npm publish || echo "Maybe package already published"
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
