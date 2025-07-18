@@ -51,6 +51,7 @@ function errorFormat(reason?: Reason, ...slots: StringLike[]) {
   }
   return reason;
 }
+
 function stringifyError(reason?: Reason, ...slots: StringLike[]) {
   if (typeof reason === "string") {
     return reason.trim();
