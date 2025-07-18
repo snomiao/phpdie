@@ -36,6 +36,7 @@
   "devDependencies": {
     "@amanda-mitchell/semantic-release-npm-multiple": "^3.16.0",
     "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^7.1.0",
     "@types/bun": "^1.2.18",
     "@types/jest": "^29.5.12",
     "husky": "^9.1.7",
@@ -57,21 +58,17 @@
     ],
     "plugins": [
       "@semantic-release/commit-analyzer",
-      "@semantic-release/release-notes-generator",
       "@semantic-release/changelog",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
       [
-        "@amanda-mitchell/semantic-release-npm-multiple",
+        "@semantic-release/exec",
         {
-          "registries": {
-            "phpdie": {
-              "npmPublish": true
-            },
-            "snodie": {
-              "npmPublish": true
-            }
-          }
+          "publishCmd": "npm pkg set name=@snomiao/die"
         }
-      ]
+      ],
+      "@semantic-release/npm",
+      "@semantic-release/github"
     ]
   }
 }

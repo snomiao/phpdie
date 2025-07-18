@@ -33,7 +33,7 @@ export const DIEAlert: typeof DIE = (...args) => {
 };
 
 /**
- * print error and exit with code 1.
+ * print error and exit process with code 1.
  * 
  * @deprecated Use || DIES(()=> process.exit(1), console.error('ERROR')) instead
  */
