@@ -5,7 +5,7 @@
 ## Usage
 
 ```js
-import DIE from '@snomiao/die'
+import DIE from 'phpdie'
 const token = process.env.TOKEN ?? DIE("Missing Token")
 
 console.log(token) // typeof token === "string"
@@ -20,18 +20,23 @@ The `DIES` function allows you to call an alert function (like `alert`, `console
 ```js
 import { DIES } from '@snomiao/die'
 
+const ooops = false!
+
 // With alert
-DIES(alert, "Something went wrong!");
+ooops || DIES(alert, "Something went wrong!");
 
 // With console.error
-DIES(console.error, "Error:", 404, "Not Found");
+ooops || DIES(console.error, "Error:", 404, "Not Found");
 
 // With toast notifications
-DIES(toast.error, "Failed to save data");
+ooops || DIES(toast.error, "Failed to save data");
 
 // With custom alert function
 const showError = (msg) => { /* show error in UI */ };
-DIES(showError, "Custom error message");
+ooops || DIES(showError, "Custom error message");
+
+ooops || DIES(()=> 'anyway die');
+
 ```
 
 The `DIES` function:
