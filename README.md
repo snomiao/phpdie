@@ -1,4 +1,4 @@
-# Die
+# PHPDIE aka @snomiao/die
 
 `|| DIE('reason')` Throws an error like PHP's `or DIE('REASON')`, Simple error throwing in a functional dev.
 

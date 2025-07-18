@@ -1,7 +1,7 @@
 {
   "name": "phpdie",
   "version": "1.2.14",
-  "description": "|| DIE('reason') Throws an error like PHP 's `or DIE('REASON')`, Simple error throwing in a functional dev.",
+  "description": "|| DIE('reason') Throws an error like PHP 's `OR DIE('REASON')`, Simple error throwing in a functional dev style.",
   "keywords": [
     "throw",
     "error",
@@ -11,7 +11,7 @@
     "pipe",
     "or die"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "author": "snomiao <snomiao@gmail.com>",
   "type": "module",
   "exports": {
