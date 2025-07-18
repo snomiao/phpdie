@@ -63,8 +63,12 @@
         "@amanda-mitchell/semantic-release-npm-multiple",
         {
           "registries": {
-            "phpdie": {},
-            "snodie": {}
+            "phpdie": {
+              "npmPublish": true
+            },
+            "snodie": {
+              "npmPublish": true
+            }
           }
         }
       ]
