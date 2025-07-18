@@ -20,7 +20,11 @@ jobs:
         env:
           # reminder to setup read/write permission for this token
           # here: REPO_URL/settings/actions
+          # for publishing to GitHub releases
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+          # for publishing to npm
           PHPDIE_NPM_CONFIG_REGISTRY: https://registry.npmjs.org
           PHPDIE_NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           SNODIE_NPM_CONFIG_REGISTRY: https://registry.npmjs.org
