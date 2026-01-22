@@ -13,7 +13,7 @@ it("dies sync", async () => {
   const rej = expect(
     (async function () {
       return catchArgs(parse)("not_parsable");
-    })()
+    })(),
   ).rejects;
   await rej.toBeInstanceOf(Error);
   await rej.toHaveProperty("cause", { args: ["not_parsable"] });
@@ -22,7 +22,7 @@ it("dies async", async () => {
   const rej = expect(
     (async function () {
       return await catchArgs(asyncParse)("not_parsable");
-    })()
+    })(),
   ).rejects;
   await rej.toBeInstanceOf(Error);
   await rej.toHaveProperty("cause", { args: ["not_parsable"] });

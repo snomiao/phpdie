@@ -58,7 +58,7 @@ function loadSecrets() {
   const secret = process.env.SECRET_KEY;
 
   if (!secret) {
-    DIE(("SECRET_KEY environment variable is required for security"));
+    DIE("SECRET_KEY environment variable is required for security");
   }
 
   console.log("Secrets loaded successfully");
@@ -70,18 +70,17 @@ function setupCloudProvider() {
   const provider = process.env.CLOUD_PROVIDER ?? "aws";
 
   if (provider === "aws") {
-    const accessKey = process.env.AWS_ACCESS_KEY_ID ??
-      DIE`AWS provider requires ${"AWS_ACCESS_KEY_ID"}`;
-    const secretKey = process.env.AWS_SECRET_ACCESS_KEY ??
-      DIE`AWS provider requires ${"AWS_SECRET_ACCESS_KEY"}`;
+    const accessKey =
+      process.env.AWS_ACCESS_KEY_ID ?? DIE`AWS provider requires ${"AWS_ACCESS_KEY_ID"}`;
+    const secretKey =
+      process.env.AWS_SECRET_ACCESS_KEY ?? DIE`AWS provider requires ${"AWS_SECRET_ACCESS_KEY"}`;
 
     console.log("AWS credentials configured");
     return { provider, accessKey, secretKey };
   }
 
   if (provider === "gcp") {
-    const projectId = process.env.GCP_PROJECT_ID ??
-      DIE`GCP provider requires ${"GCP_PROJECT_ID"}`;
+    const projectId = process.env.GCP_PROJECT_ID ?? DIE`GCP provider requires ${"GCP_PROJECT_ID"}`;
 
     console.log(`GCP project configured: ${projectId}`);
     return { provider, projectId };

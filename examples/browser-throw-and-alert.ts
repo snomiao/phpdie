@@ -96,7 +96,7 @@ function processPayment(amount: number, cardNumber: string) {
   if (cardNumber.length !== 16) {
     DIE(customErrorHandler, `Invalid card number length: ${cardNumber.length}`, {
       expected: 16,
-      actual: cardNumber.length
+      actual: cardNumber.length,
     });
   }
 
@@ -159,12 +159,13 @@ function validateCheckoutForm(formData: {
 // Example 8: Using DIE with arrow function alerts
 function deleteAccount(confirmed: boolean) {
   // DIE with arrow functions for complex alert logic
-  confirmed || DIE(() => {
-    if (typeof window !== "undefined" && window.confirm) {
-      window.confirm("Are you sure you want to delete your account? This cannot be undone.");
-    }
-    console.error("Account deletion requires confirmation");
-  });
+  confirmed ||
+    DIE(() => {
+      if (typeof window !== "undefined" && window.confirm) {
+        window.confirm("Are you sure you want to delete your account? This cannot be undone.");
+      }
+      console.error("Account deletion requires confirmation");
+    });
 
   console.log("Account deleted");
 }

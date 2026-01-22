@@ -31,21 +31,28 @@ const DIETagged = tsaComposer(dieParser)((message: string): never => {
 // TypeScript overloads for different usage patterns
 /**
  * Throw with plain string message
+ * @example DIE("This is an error message");
  */
 export function DIE(message: string): never;
 
 /**
  * Throw with Error object
+ * @example DIE(new Error("This is an error message"));
  */
 export function DIE(error: Error): never;
 
 /**
  * Throw with alert/toast function - calls the function then throws
+ * @example DIE(alert, "This is an error message with alert");
  */
-export function DIE(alertFn: Function, ...args: any[]): never;
+export function DIE<Fn extends (message: string, ...args: any[]) => any>(
+  fn: Fn,
+  ...args: Parameters<Fn>
+): never;
 
 /**
  * Throw with tagged template literal
+ * @example DIE`This is an error with value ${value}`;
  */
 export function DIE(tsa: TemplateStringsArray, ...slots: any[]): never;
 
@@ -80,32 +87,43 @@ export function DIE(...args: any[]): never {
   const [first, ...rest] = args;
 
   // Handle tagged template literals - when called with TemplateStringsArray
-  if (typeof first === 'object' && first && Array.isArray(first) && 'raw' in first) {
+  // signature: DIE`template string ${value}`
+  if (typeof first === "object" && first && Array.isArray(first) && "raw" in first) {
     return DIETagged(first as TemplateStringsArray, ...rest);
   }
 
   // Handle Error object: DIE(new Error(...))
+  // signature: DIE(Error)
   if (first instanceof Error) {
     throw first;
   }
 
   // Handle alert/toast function pattern: DIE(fn, ...args)
   // Must check this before string check, as functions are also objects
-  if (typeof first === 'function' && rest.length > 0) {
+  // signature: DIE(alertFunction, arg1, arg2, ...)
+  if (typeof first === "function" && rest.length > 0) {
+    const fn = first as (message: string, ...args: any[]) => any;
+    const message = String(rest[0]);
+    let errorCause: unknown[] = [];
     try {
-      first(...rest);
+      fn(...(rest as Parameters<typeof fn>));
     } catch (fnError) {
-      // If the alert function itself throws, ignore it
+      // If the alert/toast/modal function itself throws, record it and attach to the new Error
+      errorCause.push(fnError);
     }
-    throw new Error('DIE', { cause: rest });
+    throw new Error(
+      message,
+      errorCause.length > 0 ? { cause: errorCause.length === 1 ? errorCause[0] : errorCause } : {},
+    );
   }
 
   // Handle plain string: DIE("message")
-  if (typeof first === 'string') {
+  // signature: DIE(string)
+  if (typeof first === "string") {
     throw new Error(first.trim());
   }
 
-  // Fallback: throw undefined or the value
+  // Fallback: throw undefined or the value, should not reach here normally
   throw first;
 }
 

@@ -11,6 +11,7 @@ Comprehensive test coverage for all DIE function usage patterns.
 ## Test Patterns
 
 ### Pattern 1: DIE(string) - Plain String Errors (wrapped in Error)
+
 Tests: 6/6 ✅
 
 - ✅ throws Error with simple message
@@ -31,6 +32,7 @@ const config = loadConfig() || DIE("Failed to load config");
 ```
 
 ### Pattern 2: DIE(Error) - Error Objects
+
 Tests: 4/4 ✅
 
 - ✅ throws Error object
@@ -45,6 +47,7 @@ const token = process.env.TOKEN ?? DIE(new Error("Missing Token"));
 ```
 
 ### Pattern 3: DIE\`template\` - Tagged Templates (no interpolation)
+
 Tests: 3/3 ✅
 
 - ✅ throws Error with simple template string
@@ -62,6 +65,7 @@ const token = process.env.TOKEN ?? DIE`Missing Token`;
 ```
 
 ### Pattern 4: DIE\`template ${value}\` - Tagged Templates (with interpolation)
+
 Tests: 6/6 ✅
 
 - ✅ throws Error with single interpolated value
@@ -88,6 +92,7 @@ DIE`Failed to process: ${innerError}`;
 ```
 
 ### Pattern 5: DIE(fn, ...args) - Function Call Pattern
+
 Tests: 8/8 ✅
 
 - ✅ calls function with single argument
@@ -108,6 +113,7 @@ false || DIE(mockAlert, "Alert message");
 ```
 
 ### Pattern 6: Edge Cases
+
 Tests: 5/5 ✅
 
 - ✅ throws undefined when called with no arguments
@@ -125,6 +131,7 @@ DIE(fn); // throws function (doesn't call it)
 ```
 
 ### Legacy Pattern: DIES (deprecated)
+
 Tests: 3/3 ✅
 
 - ✅ calls alert function and throws error
@@ -142,6 +149,7 @@ DIE(toast.error, "Upload failed");
 ```
 
 ### Integration Tests: Real-world Usage Patterns
+
 Tests: 5/5 ✅
 
 - ✅ environment variable validation
@@ -170,6 +178,7 @@ function validateForm(email: string, password: string) {
 ```
 
 ### Type Safety Tests: Compile-time Verification
+
 Tests: 2/2 ✅
 
 - ✅ return type is never
@@ -221,18 +230,18 @@ try {
 
 ## Test Matrix Coverage
 
-| Pattern | Description | Tests | Status |
-|---------|-------------|-------|--------|
-| Pattern 1 | Plain string errors (wrapped in Error) | 6 | ✅ |
-| Pattern 2 | Error objects | 4 | ✅ |
-| Pattern 3 | Tagged templates (no interpolation, wrapped in Error) | 3 | ✅ |
-| Pattern 4 | Tagged templates (with interpolation, wrapped in Error) | 6 | ✅ |
-| Pattern 5 | Function call pattern DIE(fn, ...args) | 8 | ✅ |
-| Pattern 6 | Edge cases | 5 | ✅ |
-| Legacy | DIES function (deprecated) | 3 | ✅ |
-| Integration | Real-world usage | 5 | ✅ |
-| Type Safety | TypeScript compile-time checks | 2 | ✅ |
-| **TOTAL** | | **42** | **✅** |
+| Pattern     | Description                                             | Tests  | Status |
+| ----------- | ------------------------------------------------------- | ------ | ------ |
+| Pattern 1   | Plain string errors (wrapped in Error)                  | 6      | ✅     |
+| Pattern 2   | Error objects                                           | 4      | ✅     |
+| Pattern 3   | Tagged templates (no interpolation, wrapped in Error)   | 3      | ✅     |
+| Pattern 4   | Tagged templates (with interpolation, wrapped in Error) | 6      | ✅     |
+| Pattern 5   | Function call pattern DIE(fn, ...args)                  | 8      | ✅     |
+| Pattern 6   | Edge cases                                              | 5      | ✅     |
+| Legacy      | DIES function (deprecated)                              | 3      | ✅     |
+| Integration | Real-world usage                                        | 5      | ✅     |
+| Type Safety | TypeScript compile-time checks                          | 2      | ✅     |
+| **TOTAL**   |                                                         | **42** | **✅** |
 
 ## Runtime Detection Logic
 
@@ -271,6 +280,7 @@ false || DIE(console.error, "Error:", 500);
 ```
 
 Both patterns work identically:
+
 1. Call the alert/toast function with the provided arguments
 2. Throw an Error with message "DIE"/"DIES" and arguments in the `cause` property
 

@@ -22,9 +22,12 @@ export function DIEError(reason?: Reason, ...slots: StringLike[]): never {
  * @param alert - function to show the error message, could be `alert`, `console.error`, `toast.error`, or any other function that accepts a string.
  * @deprecated DIE() now supports this usage directly, use || DIE(toast.error, 'YOUR ERROR MESSAGE') instead
  */
-export function DIES<Args extends unknown[]>(alert: (...args: readonly [...Args]) => any, ...args: readonly [...Args]): never {
+export function DIES<Args extends unknown[]>(
+  alert: (...args: readonly [...Args]) => any,
+  ...args: readonly [...Args]
+): never {
   alert(...args);
-  throw new Error('DIES', { cause: args });
+  throw new Error("DIES", { cause: args });
 }
 
 /**
@@ -33,7 +36,7 @@ export function DIES<Args extends unknown[]>(alert: (...args: readonly [...Args]
  * @deprecated Use || DIE(alert, 'YOUR ERROR MESSAGE') instead
  */
 export const DIEAlert = (...args: any[]): never => {
-  if (typeof args[0] === 'string') {
+  if (typeof args[0] === "string") {
     alert(args[0]);
   }
   return DIE(...(args as [any]));

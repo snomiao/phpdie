@@ -6,7 +6,6 @@
 import DIE, { DIES } from "./index";
 
 describe("DIE Function Test Matrix", () => {
-
   // ============================================================================
   // PATTERN 1: Plain String Errors (wrapped in Error objects)
   // ============================================================================
@@ -110,7 +109,10 @@ describe("DIE Function Test Matrix", () => {
 
     it("throws custom Error subclasses", () => {
       class CustomError extends Error {
-        constructor(message: string, public code: number) {
+        constructor(
+          message: string,
+          public code: number,
+        ) {
           super(message);
           this.name = "CustomError";
         }
@@ -264,8 +266,7 @@ describe("DIE Function Test Matrix", () => {
 
       expect(calls).toEqual([["Error message"]]);
       expect(err).toBeInstanceOf(Error);
-      expect(err.message).toBe("DIE");
-      expect(err.cause).toEqual(["Error message"]);
+      expect(err.message).toBe("Error message");
     });
 
     it("calls function with multiple arguments", () => {
@@ -281,8 +282,7 @@ describe("DIE Function Test Matrix", () => {
 
       expect(calls).toEqual([["Error:", 404, "Not Found"]]);
       expect(err).toBeInstanceOf(Error);
-      expect(err.message).toBe("DIE");
-      expect(err.cause).toEqual(["Error:", 404, "Not Found"]);
+      expect(err.message).toBe("Error:");
     });
 
     it("works with console.error", () => {
@@ -299,7 +299,7 @@ describe("DIE Function Test Matrix", () => {
 
       expect(calls).toEqual([["Console error message"]]);
       expect(err).toBeInstanceOf(Error);
-      expect(err.message).toBe("DIE");
+      expect(err.message).toBe("Console error message");
 
       console.error = originalConsoleError;
     });
@@ -352,24 +352,26 @@ describe("DIE Function Test Matrix", () => {
 
       expect(calls).toEqual([["Custom error", { code: 500 }]]);
       expect(err).toBeInstanceOf(Error);
-      expect(err.cause).toEqual(["Custom error", { code: 500 }]);
+      expect(err.message).toBe("Custom error");
     });
 
     it("catches errors from the alert function itself", () => {
-      const throwingFn = () => {
+      const throwingAlertFn = (_msg: string) => {
         throw new Error("Alert function failed");
       };
       let err: any;
 
       try {
-        DIE(throwingFn, "Message");
+        DIE(throwingAlertFn, "Message");
       } catch (e) {
         err = e;
       }
 
-      // Should throw DIE error, not the alert function error
+      // Should throw DIE error with the message, and the alert function error as cause
       expect(err).toBeInstanceOf(Error);
-      expect(err.message).toBe("DIE");
+      expect(err.message).toBe("Message");
+      expect(err.cause).toBeInstanceOf(Error);
+      expect((err.cause as Error).message).toBe("Alert function failed");
     });
 
     it("works with arrow functions", () => {
@@ -377,7 +379,7 @@ describe("DIE Function Test Matrix", () => {
       let err: any;
 
       try {
-        DIE(() => calls.push("called"), "arg1");
+        DIE((_msg: string) => calls.push("called"), "arg1");
       } catch (e) {
         err = e;
       }
