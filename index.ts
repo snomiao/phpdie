@@ -26,7 +26,7 @@ const dieParser = (tsa: TemplateStringsArray, ...slots: (StringLike | Error)[]):
  * Provides type-safe tagged template literal support
  */
 const DIETagged = tsaComposer(dieParser)((message: string): never => {
-  throw message.trim();
+  throw new Error(message.trim());
 });
 
 // TypeScript overloads for different usage patterns
@@ -106,7 +106,7 @@ export function DIE(...args: any[]): never {
 
   // Handle plain string: DIE("message")
   if (typeof first === 'string') {
-    throw first.trim();
+    throw new Error(first.trim());
   }
 
   // Fallback: throw undefined or the value

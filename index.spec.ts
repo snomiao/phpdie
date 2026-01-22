@@ -8,27 +8,29 @@ import DIE, { DIES } from "./index";
 describe("DIE Function Test Matrix", () => {
 
   // ============================================================================
-  // PATTERN 1: Plain String Errors
+  // PATTERN 1: Plain String Errors (wrapped in Error objects)
   // ============================================================================
   describe("Pattern 1: DIE(string)", () => {
-    it("throws plain string with simple message", () => {
+    it("throws Error with simple message", () => {
       let err: any;
       try {
         DIE("Simple error message");
       } catch (e) {
         err = e;
       }
-      expect(err).toEqual("Simple error message");
+      expect(err).toBeInstanceOf(Error);
+      expect(err.message).toEqual("Simple error message");
     });
 
-    it("throws plain string with whitespace trimmed", () => {
+    it("throws Error with whitespace trimmed", () => {
       let err: any;
       try {
         DIE("  Error with spaces  ");
       } catch (e) {
         err = e;
       }
-      expect(err).toEqual("Error with spaces");
+      expect(err).toBeInstanceOf(Error);
+      expect(err.message).toEqual("Error with spaces");
     });
 
     it("works with nullish coalescing (??)", () => {
@@ -38,7 +40,8 @@ describe("DIE Function Test Matrix", () => {
       } catch (e) {
         err = e;
       }
-      expect(err).toEqual("Missing value");
+      expect(err).toBeInstanceOf(Error);
+      expect(err.message).toEqual("Missing value");
     });
 
     it("works with logical OR (||)", () => {
@@ -48,7 +51,8 @@ describe("DIE Function Test Matrix", () => {
       } catch (e) {
         err = e;
       }
-      expect(err).toEqual("Failed condition");
+      expect(err).toBeInstanceOf(Error);
+      expect(err.message).toEqual("Failed condition");
     });
 
     it("does not throw when value exists (??)", () => {
@@ -124,14 +128,15 @@ describe("DIE Function Test Matrix", () => {
   // PATTERN 3: Tagged Template Literals (no interpolation)
   // ============================================================================
   describe("Pattern 3: DIE`template` (no interpolation)", () => {
-    it("throws with simple template string", () => {
+    it("throws Error with simple template string", () => {
       let err: any;
       try {
         DIE`Simple template error`;
       } catch (e) {
         err = e;
       }
-      expect(err).toEqual("Simple template error");
+      expect(err).toBeInstanceOf(Error);
+      expect(err.message).toEqual("Simple template error");
     });
 
     it("works with nullish coalescing", () => {
@@ -141,7 +146,8 @@ describe("DIE Function Test Matrix", () => {
       } catch (e) {
         err = e;
       }
-      expect(err).toEqual("Missing Token");
+      expect(err).toBeInstanceOf(Error);
+      expect(err.message).toEqual("Missing Token");
     });
 
     it("works with logical OR", () => {
@@ -151,7 +157,8 @@ describe("DIE Function Test Matrix", () => {
       } catch (e) {
         err = e;
       }
-      expect(err).toEqual("Failed condition");
+      expect(err).toBeInstanceOf(Error);
+      expect(err.message).toEqual("Failed condition");
     });
   });
 
@@ -159,7 +166,7 @@ describe("DIE Function Test Matrix", () => {
   // PATTERN 4: Tagged Template Literals (with interpolation)
   // ============================================================================
   describe("Pattern 4: DIE`template ${value}` (with interpolation)", () => {
-    it("throws with single interpolated value", () => {
+    it("throws Error with single interpolated value", () => {
       let err: any;
       const userId = 123;
       try {
@@ -167,10 +174,11 @@ describe("DIE Function Test Matrix", () => {
       } catch (e) {
         err = e;
       }
-      expect(err).toEqual("User 123 not found");
+      expect(err).toBeInstanceOf(Error);
+      expect(err.message).toEqual("User 123 not found");
     });
 
-    it("throws with multiple interpolated values", () => {
+    it("throws Error with multiple interpolated values", () => {
       let err: any;
       const userId = 123;
       const action = "delete";
@@ -179,10 +187,11 @@ describe("DIE Function Test Matrix", () => {
       } catch (e) {
         err = e;
       }
-      expect(err).toEqual("User 123 cannot delete this resource");
+      expect(err).toBeInstanceOf(Error);
+      expect(err.message).toEqual("User 123 cannot delete this resource");
     });
 
-    it("throws with string interpolation", () => {
+    it("throws Error with string interpolation", () => {
       let err: any;
       const expected = "value1";
       const actual = "value2";
@@ -191,10 +200,11 @@ describe("DIE Function Test Matrix", () => {
       } catch (e) {
         err = e;
       }
-      expect(err).toEqual("Expected value1 but got value2");
+      expect(err).toBeInstanceOf(Error);
+      expect(err.message).toEqual("Expected value1 but got value2");
     });
 
-    it("throws with Error object interpolation", () => {
+    it("throws Error with Error object interpolation", () => {
       let err: any;
       const innerError = new Error("Inner error");
       try {
@@ -202,11 +212,12 @@ describe("DIE Function Test Matrix", () => {
       } catch (e) {
         err = e;
       }
-      expect(err).toContain("Failed to process:");
-      expect(err).toContain("Inner error");
+      expect(err).toBeInstanceOf(Error);
+      expect(err.message).toContain("Failed to process:");
+      expect(err.message).toContain("Inner error");
     });
 
-    it("throws with number and boolean interpolation", () => {
+    it("throws Error with number and boolean interpolation", () => {
       let err: any;
       const count = 5;
       const isValid = false;
@@ -215,10 +226,11 @@ describe("DIE Function Test Matrix", () => {
       } catch (e) {
         err = e;
       }
-      expect(err).toEqual("Expected 5 items, valid: false");
+      expect(err).toBeInstanceOf(Error);
+      expect(err.message).toEqual("Expected 5 items, valid: false");
     });
 
-    it("throws with object interpolation", () => {
+    it("throws Error with object interpolation", () => {
       let err: any;
       const obj = { id: 1, name: "test" };
       try {
@@ -226,8 +238,9 @@ describe("DIE Function Test Matrix", () => {
       } catch (e) {
         err = e;
       }
-      expect(err).toContain("Failed with object:");
-      expect(err).toContain("[object Object]");
+      expect(err).toBeInstanceOf(Error);
+      expect(err.message).toContain("Failed with object:");
+      expect(err.message).toContain("[object Object]");
     });
   });
 
@@ -401,14 +414,15 @@ describe("DIE Function Test Matrix", () => {
       expect(err).toBeNull();
     });
 
-    it("throws empty string when called with empty string", () => {
+    it("throws Error with empty string message", () => {
       let err: any;
       try {
         DIE("");
       } catch (e) {
         err = e;
       }
-      expect(err).toEqual("");
+      expect(err).toBeInstanceOf(Error);
+      expect(err.message).toEqual("");
     });
 
     it("throws number when called with number", () => {
@@ -501,7 +515,8 @@ describe("DIE Function Test Matrix", () => {
       } catch (e) {
         err = e;
       }
-      expect(err).toEqual("API key is required");
+      expect(err).toBeInstanceOf(Error);
+      expect(err.message).toEqual("API key is required");
     });
 
     it("function parameter validation", () => {
@@ -522,7 +537,8 @@ describe("DIE Function Test Matrix", () => {
       } catch (e) {
         err = e;
       }
-      expect(err).toContain("Item at index 10 not found");
+      expect(err).toBeInstanceOf(Error);
+      expect(err.message).toContain("Item at index 10 not found");
     });
 
     it("API response validation", () => {
