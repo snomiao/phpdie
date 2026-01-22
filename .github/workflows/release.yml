@@ -5,6 +5,7 @@ jobs:
     permissions:
       contents: write
       issues: write
+      id-token: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -22,4 +23,3 @@ jobs:
           # here: REPO_URL/settings/actions
           # for publishing to GitHub releases
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

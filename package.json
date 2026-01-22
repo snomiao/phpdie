@@ -50,7 +50,8 @@
     "access": "public"
   },
   "dependencies": {
-    "expect-type": "^0.19.0"
+    "expect-type": "^0.19.0",
+    "tsa-composer": "^3.0.3"
   },
   "release": {
     "branches": [

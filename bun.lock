@@ -1,10 +1,12 @@
 {
   "lockfileVersion": 1,
+  "configVersion": 0,
   "workspaces": {
     "": {
       "name": "phpdie",
       "dependencies": {
         "expect-type": "^0.19.0",
+        "tsa-composer": "^3.0.3",
       },
       "devDependencies": {
         "@amanda-mitchell/semantic-release-npm-multiple": "^3.16.0",
@@ -539,6 +541,8 @@
     "to-regex-range": ["to-regex-range@5.0.1", "", { "dependencies": { "is-number": "^7.0.0" } }, "sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ=="],
 
     "traverse": ["traverse@0.6.8", "", {}, "sha512-aXJDbk6SnumuaZSANd21XAo15ucCDE38H4fkqiGsc3MhCK+wOlZvLP9cB/TvpHT0mOyWgC4Z8EwRlzqYSUzdsA=="],
+
+    "tsa-composer": ["tsa-composer@3.0.3", "", { "peerDependencies": { "typescript": "^5.8.3" } }, "sha512-apQPSpi6wtLc6mQUWiqz/Uhm2I2Lu8/HHB8gePxoGOeJuWtHlnDM6gvAGJ5OF15bKN1sS5Dqm5ksdwv3Fz7qzg=="],
 
     "type-fest": ["type-fest@4.41.0", "", {}, "sha512-TeTSQ6H5YHvpqVwBRcnLDCBnDOHWYu7IvGbHT6N8AOymcr9PJGjc1GTtiWZTYg0NCgYwvnYWEkVChQAr9bjfwA=="],
 

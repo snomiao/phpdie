@@ -39,6 +39,42 @@ it("dies with template string", () => {
   expect(err).toEqual("Missing Token");
 });
 
+it("dies with template string and interpolated values", () => {
+  let err: any;
+  const userId = 123;
+  const action = "access";
+  try {
+    DIE`User ${userId} cannot ${action} this resource`;
+  } catch (e) {
+    err = e;
+  }
+  expect(err).toEqual("User 123 cannot access this resource");
+});
+
+it("dies with template string and multiple interpolations", () => {
+  let err: any;
+  try {
+    const expected = "value1";
+    const actual = "value2";
+    DIE`Expected ${expected} but got ${actual}`;
+  } catch (e) {
+    err = e;
+  }
+  expect(err).toEqual("Expected value1 but got value2");
+});
+
+it("dies with template string and Error object interpolation", () => {
+  let err: any;
+  const innerError = new Error("Inner error");
+  try {
+    DIE`Failed to process: ${innerError}`;
+  } catch (e) {
+    err = e;
+  }
+  expect(err).toContain("Failed to process:");
+  expect(err).toContain("Inner error");
+});
+
 describe("DIES", () => {
   it("calls alert function and throws error", () => {
     const calls: any[][] = [];
