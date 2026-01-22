@@ -29,42 +29,94 @@ const DIETagged = tsaComposer(dieParser)((message: string): never => {
   throw message.trim();
 });
 
+// TypeScript overloads for different usage patterns
+/**
+ * Throw with plain string message
+ */
+export function DIE(message: string): never;
+
+/**
+ * Throw with Error object
+ */
+export function DIE(error: Error): never;
+
+/**
+ * Throw with alert/toast function - calls the function then throws
+ */
+export function DIE<Fn extends (...args: any[]) => any>(
+  alertFn: Fn,
+  ...args: Parameters<Fn>
+): never;
+
+/**
+ * Throw with tagged template literal
+ */
+export function DIE(tsa: TemplateStringsArray, ...slots: any[]): never;
+
 /**
  * Die with template string or error or normal string
  *
  * @example
  * // Tagged template literal
- * DIE`This is an error with value: ${value}`;
- *
- * // Tagged template with interpolated values
+ * DIE`This is an error`;
  * DIE`User ${userId} cannot ${action} this resource`;
+ * DIE`Operation failed: ${error?.message || 'Unknown error'}`;
  *
- * // Error object
+ * // Error object, with meta info support (ES2022+)
  * DIE(new Error("This is an error"));
+ * DIE(new Error("This is an error", { cause: someCause }));
  *
- * // Plain string
+ * // Plain string, will be wrapped in Error object
  * DIE("This is an error message");
  *
  * // With nullish coalescing
  * const token = process.env.TOKEN ?? DIE("Missing Token");
  *
+ * // Tap by toast/alert/modal error function and throw, all args will be passed to the function, and then throw an Error
+ * DIE(alert, "This is an error message with alert");
+ * DIE(toast.error, "This is an error message with alert");
+ * DIE(showErrorModal, "This is an error message with alert");
+ *
  * // With logical OR (PHP-style)
  * const config = loadConfig() || DIE("Failed to load config");
  */
-export function DIE(reason?: Reason, ...slots: StringLike[]): never {
+export function DIE(...args: any[]): never {
+  const [first, ...rest] = args;
+
   // Handle tagged template literals - when called with TemplateStringsArray
-  if (typeof reason === 'object' && reason && Array.isArray(reason) && 'raw' in reason) {
-    return DIETagged(reason as TemplateStringsArray, ...slots as any[]);
+  if (typeof first === 'object' && first && Array.isArray(first) && 'raw' in first) {
+    return DIETagged(first as TemplateStringsArray, ...rest);
   }
 
-  // Handle direct function calls
-  throw errorFormat(reason, ...slots);
+  // Handle Error object: DIE(new Error(...))
+  if (first instanceof Error) {
+    throw first;
+  }
+
+  // Handle alert/toast function pattern: DIE(fn, ...args)
+  // Must check this before string check, as functions are also objects
+  if (typeof first === 'function' && rest.length > 0) {
+    try {
+      first(...rest);
+    } catch (fnError) {
+      // If the alert function itself throws, ignore it
+    }
+    throw new Error('DIE', { cause: rest });
+  }
+
+  // Handle plain string: DIE("message")
+  if (typeof first === 'string') {
+    throw first.trim();
+  }
+
+  // Fallback: throw undefined or the value
+  throw first;
 }
 
 /** DIE with template string or error or normal string */
 export default DIE;
 
-/** @deprecated use DIE(new Error(...))  */
+/** @deprecated DIE(...) always throws Error Object now */
 export function DIEError(reason?: Reason, ...slots: StringLike[]): never {
   throw new Error(stringifyError(reason, ...slots));
 }
@@ -74,6 +126,7 @@ export function DIEError(reason?: Reason, ...slots: StringLike[]): never {
  *
  * allow use toast.error or alert to show the error message
  * @param alert - function to show the error message, could be `alert`, `console.error`, `toast.error`, or any other function that accepts a string.
+ * @deprecated DIE() now supports this usage directly, use || DIE(toast.error, 'YOUR ERROR MESSAGE') instead
  */
 export function DIES<Args extends unknown[]>(alert: (...args: readonly [...Args]) => any, ...args: readonly [...Args]): never {
   alert(...args);
@@ -83,36 +136,23 @@ export function DIES<Args extends unknown[]>(alert: (...args: readonly [...Args]
 /**
  * show an alert with the error message and stop current function.
  *
- * @deprecated Use || DIES(alert, 'YOUR ERROR MESSAGE') instead
+ * @deprecated Use || DIE(alert, 'YOUR ERROR MESSAGE') instead
  */
-export const DIEAlert: typeof DIE = (...args) => {
-  alert(stringifyError(...args));
+export const DIEAlert = (...args: any[]) => {
+  if (typeof args[0] === 'string') {
+    alert(args[0]);
+  }
   DIE(...args);
 };
 
 /**
  * print error and exit process with code 1.
  *
- * @deprecated Use || DIES(()=> process.exit(1), console.error('ERROR')) instead
+ * @deprecated Use || DIE(console.error, 'ERROR') instead
  */
-export const DIEProcess: typeof DIE = (...args) => {
-  console.error(stringifyError(...args));
+export const DIEProcess = (...args: any[]) => {
+  console.error(...args);
   process.exit(1);
-}
-
-/**
- * Formats error output based on the reason type
- * Handles strings, template string arrays, and Error objects
- */
-function errorFormat(reason?: Reason, ...slots: StringLike[]): string | Error | undefined {
-  if (typeof reason === "string") {
-    return reason.trim();
-  }
-  if (Array.isArray(reason) && typeof reason[0] === "string") {
-    // Template string array - join with slots
-    return reason.map((e, i) => e + (slots[i] ?? "")).join("");
-  }
-  return reason as Error | undefined;
 }
 
 export { catchArgs };

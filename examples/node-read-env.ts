@@ -1,3 +1,4 @@
+#!/usr/bin/env bun
 /**
  * Node.js Example: Using DIE for environment variable validation
  *
@@ -5,7 +6,7 @@
  * variables in a Node.js application with proper error handling.
  */
 
-import DIE from "phpdie";
+import DIE from "../index.ts";
 
 // Example 1: Basic environment variable validation
 function connectToDatabase() {
@@ -57,7 +58,7 @@ function loadSecrets() {
   const secret = process.env.SECRET_KEY;
 
   if (!secret) {
-    DIE(new Error("SECRET_KEY environment variable is required for security"));
+    DIE(("SECRET_KEY environment variable is required for security"));
   }
 
   console.log("Secrets loaded successfully");
