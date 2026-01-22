@@ -66,7 +66,7 @@ const toast: ToastFunction = {
 
 function uploadFile(file: File | null) {
   // DIE now supports calling toast.error directly!
-  file || DIE(toast.error, "Please select a file to upload");
+  if (!file) DIE(toast.error, "Please select a file to upload");
 
   const maxSize = 5 * 1024 * 1024; // 5MB
   if (file.size > maxSize) {
@@ -142,13 +142,13 @@ function validateCheckoutForm(formData: {
 
   // Validate email format
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(formData.email)) {
+  if (!emailRegex.test(formData.email!)) {
     DIE(toast.error, `Invalid email format: ${formData.email}`);
   }
 
   // Validate ZIP code format (US)
   const zipRegex = /^\d{5}(-\d{4})?$/;
-  if (!zipRegex.test(formData.zipCode)) {
+  if (!zipRegex.test(formData.zipCode!)) {
     DIE(toast.error, `Invalid ZIP code format: ${formData.zipCode}`);
   }
 

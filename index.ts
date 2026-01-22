@@ -43,10 +43,7 @@ export function DIE(error: Error): never;
 /**
  * Throw with alert/toast function - calls the function then throws
  */
-export function DIE<Fn extends (...args: any[]) => any>(
-  alertFn: Fn,
-  ...args: Parameters<Fn>
-): never;
+export function DIE(alertFn: Function, ...args: any[]): never;
 
 /**
  * Throw with tagged template literal
@@ -138,11 +135,11 @@ export function DIES<Args extends unknown[]>(alert: (...args: readonly [...Args]
  *
  * @deprecated Use || DIE(alert, 'YOUR ERROR MESSAGE') instead
  */
-export const DIEAlert = (...args: any[]) => {
+export const DIEAlert = (...args: any[]): never => {
   if (typeof args[0] === 'string') {
     alert(args[0]);
   }
-  DIE(...args);
+  return DIE(...(args as [any]));
 };
 
 /**

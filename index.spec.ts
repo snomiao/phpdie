@@ -36,7 +36,8 @@ describe("DIE Function Test Matrix", () => {
     it("works with nullish coalescing (??)", () => {
       let err: any;
       try {
-        const value = undefined ?? DIE("Missing value");
+        const nullValue: string | undefined = undefined;
+        const value = nullValue ?? DIE("Missing value");
       } catch (e) {
         err = e;
       }
@@ -56,12 +57,14 @@ describe("DIE Function Test Matrix", () => {
     });
 
     it("does not throw when value exists (??)", () => {
-      const value = "exists" ?? DIE("Should not throw");
+      const maybeValue: string | undefined = "exists";
+      const value = maybeValue ?? DIE("Should not throw");
       expect(value).toEqual("exists");
     });
 
     it("does not throw when value is truthy (||)", () => {
-      const value = "truthy" || DIE("Should not throw");
+      const truthyValue: string | false = "truthy";
+      const value = truthyValue || DIE("Should not throw");
       expect(value).toEqual("truthy");
     });
   });
@@ -602,9 +605,9 @@ describe("DIE Function Test Matrix", () => {
 
     it("works in type narrowing", () => {
       function processValue(value: string | null): string {
-        value ?? DIE("Value cannot be null");
-        // TypeScript narrows value to string here
-        return value.toUpperCase();
+        const checkedValue = value ?? DIE("Value cannot be null");
+        // TypeScript narrows checkedValue to string here
+        return checkedValue.toUpperCase();
       }
 
       expect(() => processValue(null)).toThrow();
