@@ -30,8 +30,7 @@ function handleError(error: unknown, args: any[]) {
     throw Object.assign(error, {
       cause: {
         ...((typeof error.cause === "object" && error.cause) || null),
-        ...((typeof error.cause === "string" && { cause: error.cause }) ||
-          null),
+        ...((typeof error.cause === "string" && { cause: error.cause }) || null),
         args,
       },
     });

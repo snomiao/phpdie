@@ -42,7 +42,7 @@ yarn add phpdie
 The `DIE()` function throws an error and has a return type of `never`, making it perfect for nullish coalescing and logical OR operations.
 
 ```ts
-import DIE from 'phpdie';
+import DIE from "phpdie";
 
 // With nullish coalescing
 const token = process.env.TOKEN ?? DIE("Missing Token");
@@ -52,7 +52,7 @@ console.log(token); // typeof token === "string"
 const config = loadConfig() || DIE("Failed to load config");
 
 // Throw custom Error objects
-const data = await fetchData() ?? DIE(new Error("API request failed"));
+const data = (await fetchData()) ?? DIE(new Error("API request failed"));
 ```
 
 ### Alert & Die with `DIES()`
@@ -60,7 +60,7 @@ const data = await fetchData() ?? DIE(new Error("API request failed"));
 The `DIES()` function calls an alert/logging function before throwing an error. Perfect for user notifications or logging before termination.
 
 ```ts
-import { DIES } from 'phpdie';
+import { DIES } from "phpdie";
 
 const ooops = false;
 
@@ -74,14 +74,17 @@ ooops || DIES(console.error, "Error:", 404, "Not Found");
 ooops || DIES(toast.error, "Failed to save data");
 
 // With custom error handler
-const showError = (msg: string) => { /* show error in UI */ };
+const showError = (msg: string) => {
+  /* show error in UI */
+};
 ooops || DIES(showError, "Custom error message");
 
 // With a lambda function
-ooops || DIES(() => 'anyway die');
+ooops || DIES(() => "anyway die");
 ```
 
 **How it works:**
+
 - Calls the provided alert function with the given arguments
 - Throws an Error with message "DIES" and arguments stored in the `cause` property
 - Never returns (return type is `never`)
@@ -93,9 +96,11 @@ ooops || DIES(() => 'anyway die');
 Throws an error and never returns.
 
 **Parameters:**
+
 - `reason` - Error message string or Error object (optional)
 
 **Throws:**
+
 - If `reason` is a string: throws the error stack trace
 - If `reason` is an Error: throws the Error object
 - If no `reason`: throws undefined
@@ -105,16 +110,18 @@ Throws an error and never returns.
 Calls an alert function then throws an error.
 
 **Parameters:**
+
 - `alertFn` - Function to call before throwing (e.g., `alert`, `console.error`, `toast.error`)
 - `...args` - Arguments to pass to the alert function
 
 **Throws:**
+
 - An Error with message "DIES" and `cause` containing the alert arguments
 
 ## Examples from Tests
 
 ```ts
-import DIE from 'phpdie';
+import DIE from "phpdie";
 
 // Test: continues when value exists
 const token = "123" ?? DIE("Missing Token");

@@ -3,35 +3,43 @@
   "version": "1.2.14",
   "description": "|| DIE('reason') Throws an error like PHP 's `OR DIE('REASON')`, Simple error throwing in a functional dev style.",
   "keywords": [
-    "throw",
-    "error",
+    "@snomiao/die",
     "die",
+    "error",
     "functional",
+    "or die",
     "php",
     "pipe",
-    "or die",
-    "@snomiao/die"
+    "throw"
   ],
   "license": "MIT",
   "author": "snomiao <snomiao@gmail.com>",
+  "files": [
+    "*.ts",
+    "dist"
+  ],
   "type": "module",
-  "exports": {
-    "import": "./dist/index.js",
-    "types": "./index.ts"
-  },
   "main": "dist/index.js",
   "module": "index.ts",
   "types": "./index.ts",
-  "files": [
-    "dist",
-    "*.ts"
-  ],
+  "exports": {
+    "types": "./index.ts",
+    "import": "./dist/index.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "bun build index.ts --outdir=dist",
     "prerelease": "bun run build && bun run test",
     "release": "bunx standard-version && git push --follow-tags && npm publish",
     "test": "bun test",
+    "fmt": "tsgo && oxlint --fix && oxfmt",
     "prepare": "husky"
+  },
+  "dependencies": {
+    "expect-type": "^0.19.0",
+    "tsa-composer": "^3.0.3"
   },
   "devDependencies": {
     "@amanda-mitchell/semantic-release-npm-multiple": "^3.16.0",
@@ -39,19 +47,11 @@
     "@semantic-release/exec": "^7.1.0",
     "@types/bun": "^1.2.18",
     "@types/jest": "^29.5.12",
+    "@typescript/native-preview": "^7.0.0-dev.20260122.3",
     "husky": "^9.1.7",
-    "semantic-release": "^24.2.1",
-    "typescript": "^5.0.0"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "dependencies": {
-    "expect-type": "^0.19.0",
-    "tsa-composer": "^3.0.3"
+    "oxfmt": "^0.26.0",
+    "oxlint": "^1.41.0",
+    "semantic-release": "^24.2.1"
   },
   "release": {
     "branches": [
