@@ -1,7 +1,7 @@
 on:
   push:
 jobs:
-  semantic-release:
+  release:
     permissions:
       contents: write
       issues: write
