@@ -34,7 +34,7 @@
     "prerelease": "bun run build && bun run test",
     "release": "bunx standard-version && git push --follow-tags && npm publish",
     "test": "bun test",
-    "fmt": "tsgo && oxlint --fix && oxfmt",
+    "fmt": "tsrs && oxlint --fix && oxfmt",
     "prepare": "husky"
   },
   "dependencies": {
@@ -47,11 +47,11 @@
     "@semantic-release/exec": "^7.1.0",
     "@types/bun": "^1.2.18",
     "@types/jest": "^29.5.12",
-    "@typescript/native-preview": "^7.0.0-dev.20260122.3",
     "husky": "^9.1.7",
     "oxfmt": "^0.26.0",
     "oxlint": "^1.41.0",
-    "semantic-release": "^24.2.1"
+    "semantic-release": "^24.2.1",
+    "tsrs": "0.25.0-ts7.1.0-beta"
   },
   "release": {
     "branches": [
